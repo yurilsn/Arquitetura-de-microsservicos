@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "eureka-service",
+			"path": "eureka-service"
+		},
+		{
+			"name": "zuul-service",
+			"path": "zuul-service"
+		},
+		{
+			"name": "gerenciamento-de-pessoas",
+			"path": "gerenciamento-de-pessoas"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"java.debug.settings.onBuildFailureProceed": true
+	}
+}
