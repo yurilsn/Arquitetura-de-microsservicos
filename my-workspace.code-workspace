@@ -11,6 +11,10 @@
 		{
 			"name": "gerenciamento-de-pessoas",
 			"path": "gerenciamento-de-pessoas"
+		},
+		{
+			"name": "gerenciamento-de-animais",
+			"path": "gerenciamento-de-animais"
 		}
 	],
 	"settings": {
