@@ -7,8 +7,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="zuul-service" />
         <module name="eureka-service" />
+        <module name="gerenciamento-de-animais" />
+        <module name="zuul-service" />
         <module name="gerenciamento-de-pessoas" />
       </profile>
     </annotationProcessing>
@@ -16,6 +17,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="eureka-service" options="-parameters" />
+      <module name="gerenciamento-de-animais" options="-parameters" />
       <module name="gerenciamento-de-pessoas" options="-parameters" />
       <module name="zuul-service" options="-parameters" />
     </option>

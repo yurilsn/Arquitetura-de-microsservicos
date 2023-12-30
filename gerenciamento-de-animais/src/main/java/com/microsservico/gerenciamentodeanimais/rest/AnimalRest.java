@@ -41,12 +41,12 @@ public class AnimalRest {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<Animal> update(@RequestBody Animal updatedPostGis, @PathVariable("id") Long id) {
-        var postGis = animalRepository.findById(id).get();
-        BeanUtils.copyProperties(updatedPostGis, postGis);
+    public ResponseEntity<Animal> update(@RequestBody Animal updatedAnimal, @PathVariable("id") Long id) {
+        var animal = animalRepository.findById(id).get();
+        BeanUtils.copyProperties(updatedAnimal, animal);
         return ResponseEntity
                 .ok()
-                .body(animalRepository.save(postGis));
+                .body(animalRepository.save(animal));
     }
 
 

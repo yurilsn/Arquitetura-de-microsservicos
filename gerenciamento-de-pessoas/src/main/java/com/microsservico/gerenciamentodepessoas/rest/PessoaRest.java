@@ -1,29 +1,60 @@
 package com.microsservico.gerenciamentodepessoas.rest;
 
 import com.microsservico.gerenciamentodepessoas.domain.Pessoa;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.microsservico.gerenciamentodepessoas.repository.PessoaRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.BeanUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/Pessoas")
+@AllArgsConstructor
 public class PessoaRest {
 
+    private PessoaRepository pessoaRepository;
+
     @GetMapping
-    public List<Pessoa> read(){
-        Pessoa p1 = new Pessoa();
-        p1.setNome("João");
-        p1.setEmail("paulo32@gmail.com");
-        p1.setTelefone("3423543534");
-
-        Pessoa p2 = new Pessoa();
-        ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>();
-        pessoas.add(p1);
-        pessoas.add(p2);
-
-        return pessoas;
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<List<Pessoa>> findAll() {
+        return ResponseEntity.ok().body(pessoaRepository.findAll());
     }
+
+
+    @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Optional<Pessoa>> findById(@PathVariable("id") Long id) {
+        return ResponseEntity.ok().body(pessoaRepository.findById(id));
+    }
+
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Pessoa> save(@RequestBody Pessoa pessoa) {
+        return ResponseEntity.ok(pessoaRepository.save(pessoa));
+    }
+
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<Pessoa> update(@RequestBody Pessoa updatedPessoa, @PathVariable("id") Long id) {
+        var pessoa = pessoaRepository.findById(id).get();
+        BeanUtils.copyProperties(updatedPessoa, pessoa);
+        return ResponseEntity
+                .ok()
+                .body(pessoaRepository.save(pessoa));
+    }
+
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public ResponseEntity<?> delete(@PathVariable("id") Long id) {
+        pessoaRepository.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+    
 }
